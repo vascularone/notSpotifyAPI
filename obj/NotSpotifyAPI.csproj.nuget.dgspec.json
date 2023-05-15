@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rkastrati\\Desktop\\lab1\\NotSpotifyAPI\\NotSpotifyAPI\\NotSpotifyAPI.csproj": {}
+    "c:\\Users\\rkastrati\\Desktop\\lab1\\NotSpotifyAPI\\NotSpotifyAPI\\NotSpotifyAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rkastrati\\Desktop\\lab1\\NotSpotifyAPI\\NotSpotifyAPI\\NotSpotifyAPI.csproj": {
+    "c:\\Users\\rkastrati\\Desktop\\lab1\\NotSpotifyAPI\\NotSpotifyAPI\\NotSpotifyAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rkastrati\\Desktop\\lab1\\NotSpotifyAPI\\NotSpotifyAPI\\NotSpotifyAPI.csproj",
+        "projectUniqueName": "c:\\Users\\rkastrati\\Desktop\\lab1\\NotSpotifyAPI\\NotSpotifyAPI\\NotSpotifyAPI.csproj",
         "projectName": "NotSpotifyAPI",
-        "projectPath": "C:\\Users\\rkastrati\\Desktop\\lab1\\NotSpotifyAPI\\NotSpotifyAPI\\NotSpotifyAPI.csproj",
+        "projectPath": "c:\\Users\\rkastrati\\Desktop\\lab1\\NotSpotifyAPI\\NotSpotifyAPI\\NotSpotifyAPI.csproj",
         "packagesPath": "C:\\Users\\rkastrati\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rkastrati\\Desktop\\lab1\\NotSpotifyAPI\\NotSpotifyAPI\\obj\\",
+        "outputPath": "c:\\Users\\rkastrati\\Desktop\\lab1\\NotSpotifyAPI\\NotSpotifyAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rkastrati\\AppData\\Roaming\\NuGet\\NuGet.Config",

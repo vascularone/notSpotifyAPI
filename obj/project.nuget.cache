@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Tg/muNixMEBZUOLnlWQw2LPho5zwr99GMVCNQ7QGpXd4HLIIhpdkuy0MLsFeAbvFKwmOngC8/ZFJobVdpbDYlg==",
+  "dgSpecHash": "2kdPC+eFPHLGlgjRZ87tXdHH5f74GQRXBifUzUsvqmOMKQQ5qn1tvtcMgnN2MRQx8GRrc60kmd4726/4gz8vIw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rkastrati\\Desktop\\lab1\\NotSpotifyAPI\\NotSpotifyAPI\\NotSpotifyAPI.csproj",
+  "projectFilePath": "c:\\Users\\rkastrati\\Desktop\\lab1\\NotSpotifyAPI\\NotSpotifyAPI\\NotSpotifyAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rkastrati\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\rkastrati\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
