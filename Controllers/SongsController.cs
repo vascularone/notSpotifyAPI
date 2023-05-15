@@ -17,8 +17,8 @@ namespace NotSpotifyAPI.Controllers
         [HttpGet("GetSong")]
         public IActionResult GetString()
         {
-            var response = new { message = "this works!" };
-            return Ok(response);
+            var songs = _dbContext.Songs.ToList();
+            return Ok(songs);
         }
     }
 }
