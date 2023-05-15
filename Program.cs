@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using NotSpotifyAPI.Persistence;
 using MySqlConnector;
+using NotSpotifyAPI.Infrastructure.Persistence;
+using Application.DI;
+using Application.Common.Interfaces.Repositories;
+using NotSpotifyAPI.Infrastructure.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +22,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseMySql(
                   mySqlConnectionStringBuilder.ConnectionString,
                   ServerVersion.AutoDetect(mySqlConnectionStringBuilder.ConnectionString)), ServiceLifetime.Scoped);
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ISongRepository, SongRepository>();
+builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
+builder.Services.ConfigureServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

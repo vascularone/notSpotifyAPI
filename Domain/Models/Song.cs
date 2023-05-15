@@ -1,6 +1,8 @@
-﻿namespace NotSpotifyAPI.Models
+﻿using Domain.Common;
+
+namespace NotSpotifyAPI.Domain.Models
 {
-    public class Song
+    public class Song : BaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

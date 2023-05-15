@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NotSpotifyAPI.Models;
-using NotSpotifyAPI.Persistence;
+﻿using Application.Common.DTO;
+using Microsoft.AspNetCore.Mvc;
+using NotSpotifyAPI.Application.Services;
+using NotSpotifyAPI.Domain.Models;
+using Application.Extensions;
+using NotSpotify.Application.Common.Interfaces.Services;
 
 namespace NotSpotifyAPI.Controllers
 {
@@ -8,31 +11,50 @@ namespace NotSpotifyAPI.Controllers
     [Route("api/[controller]")]
     public class SongsController : Controller
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly ISongService _songService;
+        private readonly ILogger<SongsController> _logger;
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public SongsController(ApplicationDbContext dbContext)
+        public SongsController(ISongService songService, ILogger<SongsController> logger, IHttpContextAccessor contextAccessor)
         {
-            _dbContext = dbContext;
+            _songService = songService;
+            _logger = logger;
+            _contextAccessor = contextAccessor;
         }
+
+
         // GET: SongsController
-        [HttpGet("GetSong")]
-        public IActionResult GetString()
+        [HttpGet("GetAllSongs")]
+        public IActionResult GetAllSongs()
         {
-            var songs = _dbContext.Songs.ToList();
-            return Ok(songs);
+            try
+            {
+                _logger.LogDetailedInformation("Retreiving songs", _contextAccessor);
+                var songDTOs = _songService.GetAllSongs(); 
+                return Ok(new ResponseDTO<List<SongDTO>> { Data = songDTOs });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDetailedError(ex, string.Empty, _contextAccessor);
+                return BadRequest(ex.Message);
+            }
         }
 
-        [HttpPost("CreateSong")]
-        public IActionResult CreateSong(Song song)
+        [HttpGet("GetSongById")]
+        public IActionResult GetSongById(int id)
         {
-            var entry = _dbContext.Songs.Add(new Song
+            try
             {
-                Artist = song.Artist,
-                Id = song.Id,
-                Name = song.Name,
-            });
-            _dbContext.SaveChanges();
-            return Ok(entry);
+                _logger.LogDetailedInformation("Retreiving song", _contextAccessor);
+                var songDTO = _songService.GetSongById(id);
+                return Ok(new ResponseDTO<Song> {  Data = songDTO });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDetailedError(ex, string.Empty, _contextAccessor);
+                return BadRequest(ex.Message);
+            }
         }
+
     }
 }

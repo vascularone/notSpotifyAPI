@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NotSpotifyAPI.Models;
+using NotSpotifyAPI.Domain.Models;
 
-namespace NotSpotifyAPI.Persistence
+namespace NotSpotifyAPI.Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext
     {
@@ -10,5 +10,7 @@ namespace NotSpotifyAPI.Persistence
         }
 
         public DbSet<Song> Songs { get; set; }
+
+        public DbSet<Playlist> Playlists { get; set; }
     }
 }
