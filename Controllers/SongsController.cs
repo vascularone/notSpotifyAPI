@@ -14,7 +14,7 @@ namespace NotSpotifyAPI.Controllers
             _dbContext = dbContext;
         }
         // GET: SongsController
-        [HttpGet("GetSongStringified")]
+        [HttpGet("GetSong")]
         public IActionResult GetString()
         {
             var response = new { message = "this works!" };
