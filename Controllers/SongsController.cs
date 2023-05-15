@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NotSpotifyAPI.Models;
 using NotSpotifyAPI.Persistence;
 
 namespace NotSpotifyAPI.Controllers
@@ -19,6 +20,19 @@ namespace NotSpotifyAPI.Controllers
         {
             var songs = _dbContext.Songs.ToList();
             return Ok(songs);
+        }
+
+        [HttpPost("CreateSong")]
+        public IActionResult CreateSong(Song song)
+        {
+            var entry = _dbContext.Songs.Add(new Song
+            {
+                Artist = song.Artist,
+                Id = song.Id,
+                Name = song.Name,
+            });
+            _dbContext.SaveChanges();
+            return Ok(entry);
         }
     }
 }
