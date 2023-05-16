@@ -7,6 +7,7 @@ namespace NotSpotifyAPI.Domain.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Artist { get; set; }
+        public string LinkRef { get; set; }
 
     }
 }
