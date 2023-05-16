@@ -30,6 +30,11 @@ namespace NotSpotifyAPI.Application.Services
             return song;
         }
 
+        public void SetCurrentSong(SongDTO song)
+        {
+            _memoryCache.Set(CurrentMusicCacheKey, song);
+        }
+
         public SongDTO GetCurrentSong()
         {
             return _memoryCache.Get<SongDTO>(CurrentMusicCacheKey);
