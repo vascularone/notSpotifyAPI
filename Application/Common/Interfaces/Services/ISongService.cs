@@ -7,5 +7,8 @@ namespace NotSpotify.Application.Common.Interfaces.Services
     {
         Song GetSongById(int id);
         List<SongDTO> GetAllSongs();
+        void SetCurrentSong(SongDTO song);
+        SongDTO GetCurrentSong();
+        SongDTO GetLastClickedSong();
     }
 }

@@ -10,6 +10,7 @@ namespace Application.DI
 
         public static void ConfigureServices(this IServiceCollection services)
         {
+            services.AddMemoryCache();
             services.AddScoped<IPlaylistService, PlaylistService>();
             services.AddScoped<ISongService, SongService>();
         }

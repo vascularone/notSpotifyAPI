@@ -56,5 +56,36 @@ namespace NotSpotifyAPI.Controllers
             }
         }
 
+        [HttpPost("SetCurrentSong")]
+        public IActionResult SetCurrentSong(SongDTO song)
+        {
+            try
+            {
+                _logger.LogDetailedInformation("Retreiving song", _contextAccessor);
+                _songService.SetCurrentSong(song);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDetailedError(ex, string.Empty, _contextAccessor);
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("GetCurrentSong")]
+        public IActionResult GetCurrentSong()
+        {
+            try
+            {
+                _logger.LogDetailedInformation("Retreiving song", _contextAccessor);
+                var currentSong = _songService.GetLastClickedSong();
+                return Ok(new ResponseDTO<SongDTO> { Data = currentSong });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDetailedError(ex, string.Empty, _contextAccessor);
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }
