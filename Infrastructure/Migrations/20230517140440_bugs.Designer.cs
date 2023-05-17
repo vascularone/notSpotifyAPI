@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NotSpotifyAPI.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace NotSpotifyAPI.Infrastructure.Migrations
+namespace NotSpotifyAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230517140440_bugs")]
+    partial class bugs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,6 +62,9 @@ namespace NotSpotifyAPI.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("tinyint(1)");
@@ -118,6 +124,8 @@ namespace NotSpotifyAPI.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PlaylistId");
+
                     b.ToTable("Songs");
                 });
 
@@ -166,6 +174,15 @@ namespace NotSpotifyAPI.Infrastructure.Migrations
                     b.ToTable("UserPlaylists");
                 });
 
+            modelBuilder.Entity("NotSpotifyAPI.Domain.Models.Song", b =>
+                {
+                    b.HasOne("NotSpotifyAPI.Domain.Models.Playlist", null)
+                        .WithMany("Songs")
+                        .HasForeignKey("PlaylistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("NotSpotifyAPI.Domain.Models.UserPlaylists", b =>
                 {
                     b.HasOne("NotSpotifyAPI.Domain.Models.Playlist", "Playlist")
@@ -175,6 +192,11 @@ namespace NotSpotifyAPI.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Playlist");
+                });
+
+            modelBuilder.Entity("NotSpotifyAPI.Domain.Models.Playlist", b =>
+                {
+                    b.Navigation("Songs");
                 });
 #pragma warning restore 612, 618
         }

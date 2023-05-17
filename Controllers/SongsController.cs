@@ -31,6 +31,7 @@ namespace NotSpotifyAPI.Controllers
             {
                 _logger.LogDetailedInformation("Retreiving songs", _contextAccessor);
                 var songDTOs = _songService.GetAllSongs(); 
+
                 return Ok(new ResponseDTO<List<SongDTO>> { Data = songDTOs });
             }
             catch (Exception ex)

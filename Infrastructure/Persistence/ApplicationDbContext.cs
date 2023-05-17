@@ -14,5 +14,8 @@ namespace NotSpotifyAPI.Infrastructure.Persistence
         public DbSet<Playlist> Playlists { get; set; }
 
         public DbSet<CurrentSong> CurrentSong {  get; set; }
+        
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserPlaylists> UserPlaylists { get; set; }
     }
 }
