@@ -6,5 +6,7 @@ namespace Application.Common.Interfaces.Repositories
     {
         Song GetSong(int id);
         List<Song> GetAllSongs();
+        CurrentSong UpdateCurrentSong(int id, SongDTO song);
+        CurrentSong GetCurrentSong();
     }
 }

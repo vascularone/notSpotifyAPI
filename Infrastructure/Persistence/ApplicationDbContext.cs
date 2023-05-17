@@ -12,5 +12,7 @@ namespace NotSpotifyAPI.Infrastructure.Persistence
         public DbSet<Song> Songs { get; set; }
 
         public DbSet<Playlist> Playlists { get; set; }
+
+        public DbSet<CurrentSong> CurrentSong {  get; set; }
     }
 }

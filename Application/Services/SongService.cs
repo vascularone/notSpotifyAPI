@@ -30,23 +30,17 @@ namespace NotSpotifyAPI.Application.Services
             return song;
         }
 
-        public void SetCurrentSong(SongDTO song)
+        public CurrentSong SetCurrentSong(int id, SongDTO song)
         {
-            _memoryCache.Set(CurrentMusicCacheKey, song);
+            var s = _songRepository.UpdateCurrentSong(id, song);
+            return s;
         }
 
-        public SongDTO GetCurrentSong()
+        public CurrentSong GetCurrentSong()
         {
-            return _memoryCache.Get<SongDTO>(CurrentMusicCacheKey);
+            var song = _songRepository.GetCurrentSong();
+            return song;
         }
 
-        public SongDTO GetLastClickedSong()
-        {
-            if (_memoryCache.TryGetValue(CurrentMusicCacheKey, out SongDTO song))
-            {
-                return song;
-            }
-            return null;
-        }
     }
 }
