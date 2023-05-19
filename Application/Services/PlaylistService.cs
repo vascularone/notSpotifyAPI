@@ -1,34 +1,45 @@
-﻿using Application.Common.DTO;
+﻿using Application.Common.Interfaces.Repositories;
 using NotSpotify.Application.Common.Interfaces.Services;
+using NotSpotifyAPI.Domain.DTO;
 using NotSpotifyAPI.Domain.Models;
 
 namespace NotSpotifyAPI.Application.Services
 {
     public class PlaylistService : IPlaylistService
     {
-        public Task<ResponseDTO<bool>> CreatePlaylist(Playlist playlist)
+        private readonly IPlaylistRepository _playlistRepository;
+
+        public PlaylistService(IPlaylistRepository playlistRepository)
         {
-            throw new NotImplementedException();
+            _playlistRepository = playlistRepository;
+        }
+        public Playlist GetPlaylistById(int id)
+        {
+            var playlist = this._playlistRepository.GetPlaylistById(id);
+            if (playlist == null)
+            {
+                return null;
+            }
+            return playlist;
+        }
+        public List<Playlist> GetPlaylistByUserId(int userId)
+        {
+            var playList = _playlistRepository.GetPlaylistsByUserId(userId);
+            if(playList == null)
+            {
+                return null;
+            }
+            return playList;
         }
 
-        public Task<ResponseDTO<bool>> DeletePlaylist(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Playlist GetPlaylistById(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResponseDTO<List<Playlist>>> GetPlaylists()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResponseDTO<bool>> UpdateUser(Playlist playlist)
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public List<Song> GetSongsByPlaylistId(int playlistId)
+		{
+			var songs = _playlistRepository.GetSongsByPlaylistId(playlistId);
+            if(songs == null)
+            {
+                return null;
+            }
+            return songs;
+		}
+	}
 }

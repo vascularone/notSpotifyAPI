@@ -9,7 +9,7 @@ namespace NotSpotifyAPI.Infrastructure.Repositories
     public class PlaylistRepository : BaseRepository<Playlist>, IPlaylistRepository
     {
         public PlaylistRepository(ApplicationDbContext context) : base(context) { }
-        public Playlist GetPlaylistsByUserId(int userId)
+        public List<Playlist> GetPlaylistsByUserId(int userId)
         {
             var playlistIds = _dbContext.UserPlaylists
                     .Where(up => up.UserId == userId)
@@ -17,7 +17,7 @@ namespace NotSpotifyAPI.Infrastructure.Repositories
                     .ToList();
 
             var playlists = _dbContext.Playlists
-                .Where(p => playlistIds.Contains(p.Id)).FirstOrDefault();
+                .Where(p => playlistIds.Contains(p.Id)).ToList();
 
             return playlists;
         }

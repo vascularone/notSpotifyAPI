@@ -4,7 +4,8 @@ namespace Application.Common.Interfaces.Repositories
 {
     public interface IPlaylistRepository : IBaseRepository<Playlist>
     {
-        Playlist GetPlaylist(string id);
-        List<Playlist> GetAllPlaylists();
+        Playlist GetPlaylistById(int id);
+        List<Playlist> GetPlaylistsByUserId(int userId);
+        List<Song> GetSongsByPlaylistId(int playlistId);
     }
 }

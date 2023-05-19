@@ -32,7 +32,7 @@ namespace NotSpotifyAPI.Controllers
                 {
                     return NotFound("No Playlist found");
                 }
-                return Ok(new ResponseDTO<Playlist> { Data = playlist });
+                return Ok(new ResponseDTO<List<Playlist>> { Data = playlist });
             }
             catch (Exception ex)
             {
