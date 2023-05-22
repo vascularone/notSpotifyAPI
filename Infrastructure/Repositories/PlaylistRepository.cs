@@ -28,7 +28,13 @@ namespace NotSpotifyAPI.Infrastructure.Repositories
 
         public List<Song> GetSongsByPlaylistId(int playlistId)
         {
-            return this._dbContext.Songs.Where(a => a.PlaylistId == playlistId).ToList();
+            var playlist = _dbContext.PlaylistSongs
+                .Where(i => i.PlaylistId == playlistId)
+                .Select(i => i.SongId)
+                .ToList();
+            var songs = _dbContext.Songs
+                .Where(p => playlist.Contains(p.Id)).ToList();
+            return songs;
         }
     }
 }

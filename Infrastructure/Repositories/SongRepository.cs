@@ -10,8 +10,7 @@ namespace NotSpotifyAPI.Infrastructure.Repositories
         public SongRepository(ApplicationDbContext context) : base(context) { }
         public List<Song> GetAllSongs()
         {
-            return this._dbContext.Songs
-                  .Where(a => this._dbContext.Playlists.Any(p => p.Id == a.PlaylistId)).ToList();
+            return this._dbContext.Songs.ToList();
         }
 
         public Song GetSong(int id)
