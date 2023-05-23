@@ -10,6 +10,12 @@ namespace NotSpotifyAPI.Infrastructure.Repositories
     {
         public UserPlaylistRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
+
+        }
+
+        public List<UserPlaylists> GetAll()
+        {
+            return _dbContext.UserPlaylists.ToList();
         }
     }
 }

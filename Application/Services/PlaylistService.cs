@@ -11,11 +11,13 @@ namespace NotSpotifyAPI.Application.Services
     {
         private readonly IPlaylistRepository _playlistRepository;
         private readonly IUserPlaylistRepository _userPlaylistRepository;
+        private readonly IUserRepository _userRepository;
 
-        public PlaylistService(IPlaylistRepository playlistRepository, IUserPlaylistRepository userPlaylistRepository)
+        public PlaylistService(IPlaylistRepository playlistRepository, IUserPlaylistRepository userPlaylistRepository, IUserRepository userRepository)
         {
             _playlistRepository = playlistRepository;
             _userPlaylistRepository = userPlaylistRepository;
+            _userRepository = userRepository;
         }
         public Playlist GetPlaylistById(int id)
         {
@@ -46,18 +48,37 @@ namespace NotSpotifyAPI.Application.Services
             return songs;
 		}
 
-        public Playlist CreatePlaylist(PlaylistDTO playlist)
+        public Playlist CreatePlaylist(PlaylistDTO playlist, int userId)
         {
-                var entry = new Playlist
-                {
-                    Name = playlist.Name,
-                    Description = playlist.Description,
-                    LinkRef = playlist.LinkRef,
-                };
-                _playlistRepository.Insert(entry);
-                _playlistRepository.SaveChanges();
-                return entry;
+            var entry = new Playlist
+            {
+                Name = playlist.Name,
+                Description = playlist.Description,
+                LinkRef = playlist.LinkRef,
+            };
+
+            _playlistRepository.Insert(entry);
+
+            var user = _userRepository.getUserById(userId);
+
+            var secondEntry = new UserPlaylists
+            {
+                User = user,
+                UserId = userId,
+                PlaylistId = entry.Id,
+            };
+
+            user.UserPlaylists.Add(secondEntry); // Add the UserPlaylists entry to the user's UserPlaylists collection
+
+            secondEntry.Playlist.Add(entry);
+
+            _userPlaylistRepository.Insert(secondEntry);
+            _playlistRepository.SaveChanges();
+
+            return entry;
         }
+
+
 
         public bool DeletePlaylist(int playlistId)
         {

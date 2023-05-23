@@ -10,7 +10,8 @@ namespace NotSpotifyAPI.Domain.Models
         public string Password { get; set; }
         public string Username {  get; set; }
         public string Role { get; set; }
-        public virtual List<Playlist> Playlist { get; set; }
+        public virtual List<UserPlaylists> UserPlaylists { get; set; }
+
 
 
     }

@@ -13,10 +13,10 @@ namespace NotSpotifyAPI.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        private readonly ILogger<SongsController> _logger;
+        private readonly ILogger<UserController> _logger;
         private readonly IHttpContextAccessor _contextAccessor;
 
-        public UserController(IUserService userService, ILogger<SongsController> logger, IHttpContextAccessor contextAccessor)
+        public UserController(IUserService userService, ILogger<UserController> logger, IHttpContextAccessor contextAccessor)
         {
             _userService = userService;
             _logger = logger;

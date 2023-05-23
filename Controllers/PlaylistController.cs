@@ -77,12 +77,12 @@ namespace NotSpotifyAPI.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult CreatePlaylist(PlaylistDTO playlist)
+        public IActionResult CreatePlaylist(PlaylistDTO playlist, int userId)
         {
             try
             {
                 _logger.LogDetailedInformation("Creating playlist", _contextAccessor);
-                var entry = _playlistService.CreatePlaylist(playlist);
+                var entry = _playlistService.CreatePlaylist(playlist, userId);
                 return Ok(new ResponseDTO<Playlist> { Data = entry });
             }
             catch (Exception ex)
