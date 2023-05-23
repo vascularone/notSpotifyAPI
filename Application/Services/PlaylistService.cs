@@ -68,7 +68,7 @@ namespace NotSpotifyAPI.Application.Services
                 PlaylistId = entry.Id,
             };
 
-            user.UserPlaylists.Add(secondEntry); // Add the UserPlaylists entry to the user's UserPlaylists collection
+            user.Playlist.Add(entry); // Add the UserPlaylists entry to the user's UserPlaylists collection
 
             secondEntry.Playlist.Add(entry);
 
