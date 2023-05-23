@@ -4,6 +4,7 @@ using NotSpotifyAPI.Infrastructure.Persistence;
 using Application.DI;
 using Application.Common.Interfaces.Repositories;
 using NotSpotifyAPI.Infrastructure.Repositories;
+using NotSpotifyAPI.Application.Common.Interfaces.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,8 @@ options.UseMySql(
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISongRepository, SongRepository>();
 builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
+builder.Services.AddScoped<IUserPlaylistRepository, UserPlaylistRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.ConfigureServices();
 var app = builder.Build();
 

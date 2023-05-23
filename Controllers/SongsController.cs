@@ -30,7 +30,7 @@ namespace NotSpotifyAPI.Controllers
             try
             {
                 _logger.LogDetailedInformation("Retreiving songs", _contextAccessor);
-                var songDTOs = _songService.GetAllSongs(); 
+                var songDTOs = _songService.GetAllSongs();
 
                 return Ok(new ResponseDTO<List<SongDTO>> { Data = songDTOs });
             }
@@ -48,7 +48,7 @@ namespace NotSpotifyAPI.Controllers
             {
                 _logger.LogDetailedInformation("Retreiving song", _contextAccessor);
                 var songDTO = _songService.GetSongById(id);
-                return Ok(new ResponseDTO<Song> {  Data = songDTO });
+                return Ok(new ResponseDTO<Song> { Data = songDTO });
             }
             catch (Exception ex)
             {
@@ -80,6 +80,37 @@ namespace NotSpotifyAPI.Controllers
                 _logger.LogDetailedInformation("Retreiving song", _contextAccessor);
                 var currentSong = _songService.GetCurrentSong();
                 return Ok(new ResponseDTO<CurrentSong> { Data = currentSong });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDetailedError(ex, string.Empty, _contextAccessor);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult CreateSong(SongDTO song)
+        {
+            try
+            {
+                _logger.LogDetailedInformation("Creating song", _contextAccessor);
+                var entry = _songService.CreateSong(song);
+                return Ok(new ResponseDTO<Song> { Data = entry });
+            } catch (Exception ex)
+            {
+                _logger.LogDetailedError(ex, string.Empty, _contextAccessor);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("[action]")]
+        public IActionResult DeleteSong(int id)
+        {
+            try
+            {
+                _logger.LogDetailedInformation("Deleting song", _contextAccessor);
+                var entry = _songService.DeleteSong(id);
+                return Ok(new ResponseDTO<bool> { Data = entry });
             }
             catch (Exception ex)
             {

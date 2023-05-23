@@ -3,6 +3,7 @@ using Application.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using NotSpotify.Application.Common.Interfaces.Services;
 using NotSpotifyAPI.Application.Services;
+using NotSpotifyAPI.Domain.DTO;
 using NotSpotifyAPI.Domain.Models;
 
 namespace NotSpotifyAPI.Controllers
@@ -67,6 +68,39 @@ namespace NotSpotifyAPI.Controllers
                 var playlist = _playlistService.GetSongsByPlaylistId(id);
 
                 return Ok(new ResponseDTO<List<Song>> { Data = playlist });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDetailedError(ex, string.Empty, _contextAccessor);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult CreatePlaylist(PlaylistDTO playlist)
+        {
+            try
+            {
+                _logger.LogDetailedInformation("Creating playlist", _contextAccessor);
+                var entry = _playlistService.CreatePlaylist(playlist);
+                return Ok(new ResponseDTO<Playlist> { Data = entry });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDetailedError(ex, string.Empty, _contextAccessor);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("[action]")]
+        public IActionResult DeletePlaylist(int id)
+        {
+            try
+            {
+                _logger.LogDetailedInformation("Deleting playlist", _contextAccessor);
+                var entry = _playlistService.DeletePlaylist(id);
+
+                return Ok(new ResponseDTO<bool> { Data = entry });
             }
             catch (Exception ex)
             {

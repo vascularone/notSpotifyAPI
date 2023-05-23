@@ -9,5 +9,7 @@ namespace NotSpotify.Application.Common.Interfaces.Services
         List<SongDTO> GetAllSongs();
         CurrentSong SetCurrentSong(int id, SongDTO song);
         CurrentSong GetCurrentSong();
+        Song CreateSong(SongDTO song);
+        bool DeleteSong(int id);
     }
 }

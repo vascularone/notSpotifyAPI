@@ -1,5 +1,7 @@
 ﻿using Application.Common.Interfaces.Repositories;
+using Application.Extensions;
 using NotSpotify.Application.Common.Interfaces.Services;
+using NotSpotifyAPI.Application.Common.Interfaces.Repositories;
 using NotSpotifyAPI.Domain.DTO;
 using NotSpotifyAPI.Domain.Models;
 
@@ -8,10 +10,12 @@ namespace NotSpotifyAPI.Application.Services
     public class PlaylistService : IPlaylistService
     {
         private readonly IPlaylistRepository _playlistRepository;
+        private readonly IUserPlaylistRepository _userPlaylistRepository;
 
-        public PlaylistService(IPlaylistRepository playlistRepository)
+        public PlaylistService(IPlaylistRepository playlistRepository, IUserPlaylistRepository userPlaylistRepository)
         {
             _playlistRepository = playlistRepository;
+            _userPlaylistRepository = userPlaylistRepository;
         }
         public Playlist GetPlaylistById(int id)
         {
@@ -41,5 +45,28 @@ namespace NotSpotifyAPI.Application.Services
             }
             return songs;
 		}
+
+        public Playlist CreatePlaylist(PlaylistDTO playlist)
+        {
+                var entry = new Playlist
+                {
+                    Name = playlist.Name,
+                    Description = playlist.Description,
+                    LinkRef = playlist.LinkRef,
+                };
+                _playlistRepository.Insert(entry);
+                _playlistRepository.SaveChanges();
+                return entry;
+        }
+
+        public bool DeletePlaylist(int playlistId)
+        {
+            var playlist = _playlistRepository.GetPlaylistById(playlistId);
+            if (playlist == null)
+                return false;
+            _playlistRepository.Delete(playlist);
+            _playlistRepository.SaveChanges();
+            return true;
+        }
 	}
 }

@@ -15,7 +15,7 @@ namespace NotSpotifyAPI.Application.Services
         }
         public List<SongDTO> GetAllSongs()
         {
-            var songs = _songRepository.GetAllSongs().Select(x => new SongDTO { Id = x.Id, Name = x.Name, Artist = x.Artist, LinkRef = x.LinkRef});
+            var songs = _songRepository.GetAllSongs().Select(x => new SongDTO { Name = x.Name, Artist = x.Artist, LinkRef = x.LinkRef});
 
             return songs.ToList();
         }
@@ -38,5 +38,28 @@ namespace NotSpotifyAPI.Application.Services
             return song;
         }
 
+        public Song CreateSong(SongDTO song)
+        {
+            var entry = new Song
+            {
+                Name = song.Name,
+                Artist = song.Artist,
+                LinkRef = song.LinkRef
+            };
+            _songRepository.Insert(entry);
+            _songRepository.SaveChanges();
+            return entry;
+        }
+        public bool DeleteSong(int id)
+        {
+            var song = _songRepository.GetSong(id);
+            if(song == null)
+            {
+                return false;
+            }
+            _songRepository.Delete(song);
+            _songRepository.SaveChanges();
+            return true;
+        }
     }
 }

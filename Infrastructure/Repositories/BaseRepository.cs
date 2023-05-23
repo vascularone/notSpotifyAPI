@@ -18,11 +18,16 @@ namespace Infrastucture.Repositories
 
         public void Insert(T entity)
         {
+            entity.InsertedBy = 1;
+            entity.InsertDateTime = DateTime.Now;
             _table.Add(entity);
+
         }
 
         public void Update(T entity)
         {
+            entity.UpdatedBy = 1;
+            entity.UpdateDateTime = DateTime.Now;
             _table.Update(entity);
         }
 

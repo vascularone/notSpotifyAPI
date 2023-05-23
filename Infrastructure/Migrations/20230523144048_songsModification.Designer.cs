@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NotSpotifyAPI.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace NotSpotifyAPI.Infrastructure.Migrations
+namespace NotSpotifyAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230523144048_songsModification")]
+    partial class songsModification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,17 +165,8 @@ namespace NotSpotifyAPI.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<string>("Email")
                         .HasColumnType("longtext");
-
-                    b.Property<DateTime>("InsertDateTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("InsertedBy")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
@@ -182,12 +176,6 @@ namespace NotSpotifyAPI.Infrastructure.Migrations
 
                     b.Property<string>("Role")
                         .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("UpdateDateTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .HasColumnType("longtext");

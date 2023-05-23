@@ -1,6 +1,8 @@
-﻿namespace NotSpotifyAPI.Domain.Models
+﻿using Domain.Common;
+
+namespace NotSpotifyAPI.Domain.Models
 {
-    public class User
+    public class User : BaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -8,6 +10,7 @@
         public string Password { get; set; }
         public string Username {  get; set; }
         public string Role { get; set; }
+        public virtual List<Playlist> Playlist { get; set; }
 
 
     }
