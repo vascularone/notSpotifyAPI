@@ -6,6 +6,7 @@
         public int PlaylistId { get; set; }
         public int SongId { get; set; }
 
-        public virtual ICollection<Song> Songs { get; set; }
+        public Playlist Playlist { get; set; } // Navigation property for Playlist
+        public Song Song { get; set; } // Navigation property for Song
     }
 }

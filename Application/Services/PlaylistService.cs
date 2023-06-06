@@ -76,7 +76,7 @@ namespace NotSpotifyAPI.Application.Services
 
             user.Playlist.Add(entry); // Add the UserPlaylists entry to the user's UserPlaylists collection
 
-            secondEntry.Playlist.Add(entry);
+            secondEntry.Playlist = entry;
 
             _userPlaylistRepository.Insert(secondEntry);
             _playlistRepository.SaveChanges();

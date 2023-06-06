@@ -9,7 +9,6 @@ namespace NotSpotifyAPI.Domain.Models
         public int PlaylistId { get; set; }
 
         public virtual User User { get; set; }
-        public virtual List<Playlist> Playlist { get; set; }
-
+        public virtual Playlist Playlist { get; set; }
     }
 }
