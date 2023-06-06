@@ -42,6 +42,26 @@ namespace NotSpotifyAPI.Controllers
             }
         }
 
+         [HttpGet("GetAllPlaylists")]
+        public IActionResult GetAllPlaylists()
+        {
+            try
+            {
+                _logger.LogDetailedInformation("Retreiving playlists", _contextAccessor);
+                var playlist = _playlistService.GetAllPlaylists();
+                if (playlist == null)
+                {
+                    return NotFound("No Playlists found");
+                }
+                return Ok(new ResponseDTO<List<Playlist>> { Data = playlist });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDetailedError(ex, string.Empty, _contextAccessor);
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("GetPlaylistById")]
         public IActionResult GetPlaylistById(int id)
         {

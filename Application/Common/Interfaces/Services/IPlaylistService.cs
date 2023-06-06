@@ -12,5 +12,7 @@ namespace NotSpotify.Application.Common.Interfaces.Services
         bool DeletePlaylist(int playlistId);
         List<Song> GetSongsByPlaylistId(int playlistId);
         Playlist CreatePlaylist(PlaylistDTO playlist, int userId);
+
+        List<Playlist> GetAllPlaylists();
     }
 }

@@ -7,5 +7,6 @@ namespace Application.Common.Interfaces.Repositories
         Playlist GetPlaylistById(int id);
         List<Playlist> GetPlaylistsByUserId(int userId);
         List<Song> GetSongsByPlaylistId(int playlistId);
+        List<Playlist> GetAllPlaylists();
     }
 }

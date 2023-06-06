@@ -28,6 +28,12 @@ namespace NotSpotifyAPI.Application.Services
             }
             return playlist;
         }
+
+        public List<Playlist> GetAllPlaylists()
+        {
+            var playlists = _playlistRepository.GetAllPlaylists();
+            return playlists;
+        }
         public List<Playlist> GetPlaylistByUserId(int userId)
         {
             var playList = _playlistRepository.GetPlaylistsByUserId(userId);
